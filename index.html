@@ -1,0 +1,312 @@
+'[]'
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWST超能指挥部</title>
+    <style>
+        :root {
+            --main-color: #6c5ce7;
+            --secondary-color: #00b894;
+            --accent-color: #ff7675;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft Yahei', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2f 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem;
+        }
+
+        /* 增强版标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+            .header h1 {
+                font-size: 5rem;
+                background: linear-gradient(45deg, var(--main-color), var(--secondary-color));
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                text-shadow: 0 0 30px rgba(108,92,231,0.6);
+                letter-spacing: 2px;
+                margin-bottom: 1rem;
+            }
+
+        /* 横向成员列表 */
+        .member-row {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 2rem 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--main-color) #1a1a2f;
+        }
+
+        .member-card {
+            min-width: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--main-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+            .member-card:hover {
+                transform: translateY(-10px) scale(1.05);
+                box-shadow: 0 15px 40px rgba(108,92,231,0.3);
+            }
+
+        .member-title {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1rem;
+        }
+
+        /* 增强版弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 999;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            background: linear-gradient(145deg, #1a1a2f, #0f0f1a);
+            width: 80%;
+            height: 80vh;
+            margin: 5% auto;
+            padding: 3rem;
+            border-radius: 25px;
+            border: 3px solid var(--secondary-color);
+            box-shadow: 0 0 50px rgba(0,184,148,0.2);
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        /* 增强版标语 */
+        .slogan {
+            text-align: center;
+            font-size: 2rem;
+            margin: 4rem 0;
+            padding: 3rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            position: relative;
+            border: 2px solid var(--main-color);
+        }
+
+        .banner {
+            display: flex;
+            height: 500px;
+            margin: 4rem 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 2px dashed var(--secondary-color);
+        }
+
+        .swst-vertical {
+            writing-mode: vertical-rl;
+            font-size: 5rem;
+            color: var(--accent-color);
+            padding: 2rem;
+            text-shadow: 0 0 30px rgba(255,118,117,0.5);
+        }
+
+        .creator {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 4rem;
+            opacity: 0.8;
+            border-top: 1px solid var(--main-color);
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>SWST特殊战略部</h1>
+            <p class="slogan">你是否想揭开世界的层层面纱？是否想触摸现实的终极形态？</p>
+        </header>
+
+        <div class="member-row">
+            <!-- 指挥部 -->
+            <div class="member-card" onclick="showDetail('command')">
+                <div class="member-title">👽 指挥部组长 · 星际执政官</div>
+                <p>胡雨生 · 外星文明联络人</p>
+                <p>「维度干涉者」「量子观测者」</p>
+            </div>
+
+            <!-- 技术部 -->
+            <div class="member-card" onclick="showDetail('tech')">
+                <div class="member-title">⏳ 技术部组长 · 时空工程师</div>
+                <p>管升宇 · 跨维度技术专家</p>
+                <p>「时间锚定者」「因果律调律师」</p>
+            </div>
+
+            <!-- 侦查部 -->
+            <div class="member-card" onclick="showDetail('recon')">
+                <div class="member-title">🪽 侦查部组长 · 空域支配者</div>
+                <p>王翼晨 · 大气层战略官</p>
+                <p>「风语者」「亚音速巡游者」</p>
+            </div>
+
+            <!-- 执行部 -->
+            <div class="member-card" onclick="showDetail('execute')">
+                <div class="member-title">🌀 执行部组长 · 现实扭曲者</div>
+                <p>杨顺 · 量子态作战专家</p>
+                <p>「概率操控者」「因果律兵器」</p>
+            </div>
+
+            <!-- 潜行部 -->
+            <div class="member-card" onclick="showDetail('stealth')">
+                <div class="member-title">👻 潜行部组长 · 虚空漫步者</div>
+                <p>周思语 · 存在消除专家</p>
+                <p>「相位穿梭者」「信息消除者」</p>
+            </div>
+        </div>
+
+        <div class="banner">
+            <div class="swst-vertical">S W S T</div>
+        </div>
+
+        <div class="creator">
+            <p>战略系统架构师：管升宇</p>
+            <p>「我们不是真相的发现者，而是现实的编织者」</p>
+        </div>
+    </div>
+
+    <!-- 增强版弹窗 -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        const detailData = {
+            'command': {
+                title: '👽 星际战略指挥部',
+                content: `
+                        <h2>胡雨生 · 跨维度战略家</h2>
+                        <p>🪐 星际职称：第九银河系驻太阳系特使</p >
+                        <p>🔭 核心能力：</p >
+                        <ul>
+                            <li>量子纠缠通讯（QEC）系统操控</li>
+                            <li>引力透镜观测技术（精度达普朗克尺度）</li>
+                            <li>跨维度战略部署（最高支持11维作战）</li>
+                        </ul>
+                        <p>📜 近期任务：建立地球文明与昴宿星团的正式外交关系</p >
+                    `
+            },
+            'tech': {
+                title: '⏳ 时空工程技术部',
+                content: `
+                        <h2>管升宇 · 因果律工程师</h2>
+                        <p>⏱ 时间锚点：22世纪时间管理局首席技术官</p >
+                        <p>⚙️ 核心技术：</p >
+                        <ul>
+                            <li>封闭时间曲线（CTC）构建技术</li>
+                            <li>平行世界干涉装置「命运之弦」</li>
+                            <li>时空异常预警系统（TAWS）</li>
+                        </ul>
+                        <p>⚠️ 当前警报：检测到2025年时间线出现0.7%偏差率</p >
+                    `
+            },
+            'recon': {
+                title: '🪽 空域侦查部',
+                content: `
+                        <h2>王翼晨 · 大气层支配者</h2>
+                        <p>🛸 飞行参数：</p >
+                        <ul>
+                            <li>巡航速度：Mach 3.2（可持续72小时）</li>
+                            <li>升限高度：平流层顶点（50km）</li>
+                            <li>特殊能力：空气分子重组（形成防御护盾）</li>
+                        </ul>
+                        <p>🔍 当前监控：北纬35°至40°区域异常电磁波动</p >
+                    `
+            },
+            'execute': {
+                title: '🌀 量子执行部',
+                content: `
+                        <h2>杨顺 · 现实架构师</h2>
+                        <p>🎯 能力评级：</p >
+                        <ul>
+                            <li>量子纠缠操控等级：Ω级</li>
+                            <li>概率修改范围：±42.3%</li>
+                            <li>平行世界观测深度：7层现实</li>
+                        </ul>
+                        <p>⚡ 激活状态：正在维持东八区现实稳定性结界</p >
+                    `
+            },
+            'stealth': {
+                title: '👻 相位潜行部',
+                content: `
+                        <h2>周思语 · 虚空观测者</h2>
+                        <p>🌌 相位参数：</p >
+                        <ul>
+                            <li>存在感消除率：99.97%</li>
+                            <li>相位跳跃冷却：8.3秒</li>
+                            <li>信息消除范围：半径300米球型领域</li>
+                        </ul>
+                        <p>🕵️ 当前行动：执行「镜面行动」清除特定历史记录</p >
+                    `
+            }
+        };
+
+        function showDetail(type) {
+            const data = detailData[type];
+            document.getElementById('modalContent').innerHTML = `
+                    <div class="modal-header">
+                        <h2>${data.title}</h2>
+                    </div>
+                    <div class="modal-body">
+                        ${data.content}
+                    </div>
+                `;
+            document.getElementById('detailModal').style.display = 'block';
+        }
+
+        // 关闭弹窗
+        window.onclick = function (e) {
+            if (e.target.classList.contains('modal')) {
+                document.getElementById('detailModal').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
